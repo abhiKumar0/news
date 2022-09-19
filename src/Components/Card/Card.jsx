@@ -5,7 +5,7 @@ import "./Card.scss"
 const Card = ({ article }) => {
   return (
     <a href="#" className="news__card">
-        <img src={article?.image_url} alt="" />
+        <img src={article?.urlToImage} alt="" />
         <div className="news__card-content">
             <div>
                 <h3 className="card-title">{article?.title?.length > 80 ? article?.title?.slice(0,80).concat("...") : article?.title}</h3>

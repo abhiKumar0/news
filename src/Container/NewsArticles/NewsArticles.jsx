@@ -1,15 +1,14 @@
 import React,{ useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import Card from '../../Components/Card/Card';
 
-import Search from '../../Components/Search/Search';
+import { Card, Search } from "../../Components"
 import "./NewsArticles.scss";
 
 const NewsArticles = ({ loading, setLoading }) => {
   let { category } = useParams();
 
   const [newsArticles, setNewsArticles] = useState([]);
-  const [ searchQuery, setSearchQuery ] = useState("");
+  const [ searchQuery, setSearchQuery ] = useState('india');
  
 
   useEffect(() => {
@@ -34,15 +33,16 @@ const NewsArticles = ({ loading, setLoading }) => {
 
     const fetchSearchedArticles = async () => {
       setLoading(true)
-      let url = `https://newsapi.org/v2/evrything?q=${searchQuery}&apiKey=${import.meta.env.VITE_NEWS_API_KEY}`
-
+      let url = `https://newsapi.org/v2/everything?q=${searchQuery}&apiKey=${import.meta.env.VITE_NEWS_API_KEY}`;
+      
       const data = await fetch(url, {
         method: 'GET',
-        headers: { 'Content-Type': 'application/json'}
+        // mode: 'no-cors',
+        "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept, Authorization"
       });
       const parsedData = await data.json();
-
       setNewsArticles(parsedData.articles);
+      console.log(newsArticles)
       setLoading(false);
     }
 

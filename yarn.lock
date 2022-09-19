@@ -1028,6 +1028,11 @@
   dependencies:
     "history" "^5.2.0"
 
+"react-spinner@^0.2.7":
+  "integrity" "sha512-9bIDWGIumXpM7xcas/qpikRZp7AGP1uehgxwTTj/5DL6SwWHMTLfuioYgX7bdeMgOiVEMvOgLyXU3fYKQc16IA=="
+  "resolved" "https://registry.npmjs.org/react-spinner/-/react-spinner-0.2.7.tgz"
+  "version" "0.2.7"
+
 "react-transition-group@^4.4.5":
   "integrity" "sha512-pZcd1MCJoiKiBR2NRxeCRg13uCXbydPnmB4EOeRrY7480qNWO8IIgQG6zlDkm6uRMsURXPuKq0GWtiM59a5Q6g=="
   "resolved" "https://registry.npmjs.org/react-transition-group/-/react-transition-group-4.4.5.tgz"
@@ -1038,7 +1043,7 @@
     "loose-envify" "^1.4.0"
     "prop-types" "^15.6.2"
 
-"react@^17.0.0 || ^18.0.0", "react@^18.2.0", "react@>=16.6.0", "react@>=16.8", "react@>=16.8.0":
+"react@^17.0.0 || ^18.0.0", "react@^18.2.0", "react@>=0.12.1", "react@>=16.6.0", "react@>=16.8", "react@>=16.8.0":
   "integrity" "sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ=="
   "resolved" "https://registry.npmjs.org/react/-/react-18.2.0.tgz"
   "version" "18.2.0"

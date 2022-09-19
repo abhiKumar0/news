@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Spinner from 'react-spinner';
 
 import { Card, Hero, HorizontalScroll, NameBar } from "../../Components"
 
@@ -62,6 +63,7 @@ const News = ({ loading, setLoading }) => {
 
   return (
     <section>
+      <Spinner />
         <div className="news__news news-section">
           <NameBar name="News" bgColor="yellow" link="general" />
           <div className="news__card-container">
@@ -102,12 +104,12 @@ const News = ({ loading, setLoading }) => {
             {!loading ? techArticles.slice(0,3).map((article) => (
               <Card article={article} />
             )) : (
-              <h1>Loading...</h1>
+              <Spinner />
             )}
           </div>
         </div>
 
-        <HorizontalScroll articles={newsArticles} />
+        {/* <HorizontalScroll articles={newsArticles} /> */}
     </section>
   )
 }
