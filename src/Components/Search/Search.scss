@@ -1,0 +1,44 @@
+.news__search {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    input {
+        padding-left: 1rem;
+        height: 4rem;
+        font-size: 23px;
+        border: 1px solid #001493;
+        outline: none;
+        flex: 0.7;
+        border-radius: 5px;
+
+        @media screen and (max-width: 990px){
+            flex: 1;
+        }
+
+        @media screen and (max-width: 490px){
+            flex: 1;
+        }
+
+    }
+
+    button {
+        background: #001493;
+        color: #fff;
+        border:  1px solid #001493;
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+        height: 4rem;
+        width: 4rem;
+        margin-left: -2.5rem;
+        cursor: pointer;
+        
+    }
+}
+
+.dark {
+    input {
+        background-color: #050510;
+        color: var(--dark-color);
+    }
+}
