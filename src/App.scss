@@ -5,6 +5,11 @@
     font-family: var(--font-poppins);
 }
 
+.app {
+    overflow: hidden;
+    transition: all 0.4s ease-in-out;
+}
+
 .card-title {
     font-size: 20px;
     line-height: 26px;

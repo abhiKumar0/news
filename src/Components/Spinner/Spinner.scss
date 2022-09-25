@@ -1,0 +1,19 @@
+.news__spinner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    margin-top: 1rem;
+
+    .circle {
+        margin: 1.2rem;
+    }
+
+    p {
+        font-size: 1.5rem;
+        text-align: center;
+        padding: 0 0.5rem;
+    }
+}

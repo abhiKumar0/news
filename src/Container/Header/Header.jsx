@@ -9,11 +9,6 @@ const Header = ({ articles }) => {
       <div className="news__header-container">
         <h1>Top Stories</h1>
         <Hero articles={articles} />
-        <div className="news__header-cards">
-          {articles.slice(1,4).map((article) => (
-            <Card article={article} key={article.title} />
-          ))}
-        </div>
       </div>
     </div>
   )

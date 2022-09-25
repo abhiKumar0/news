@@ -24,20 +24,25 @@
         position: absolute;
         bottom: 4px;
         width: 100%;
-        height: calc(20% + 2rem);
-        padding: 1rem 1rem 1.4rem;
+        height: 12rem;
+        padding: 1rem 1rem 2.4rem;
         font-family: var(--font-poppins);
+
+        p {
+            margin-top: 5px;
+        }
         
 
         @media screen and (max-width: 990px) {
             bottom: 3px;
+            height: 10rem;
         }
 
         @media screen and (max-width: 490px) {
             position: static;
             padding: 0;
             background: none;
-            height: 6rem;
+            height: 8rem;
             margin-bottom: 1rem;
         }
 
@@ -101,5 +106,19 @@
             color: #bcbcbc;
         }
 
+    }
+}
+
+.dark {
+    .news__hero-content {
+        @media screen and (max-width: 490px) {
+            .card-title {
+                color: var(--dark-color);
+            }
+
+            .card-desc {
+                color: #818181;
+            }
+        }
     }
 }

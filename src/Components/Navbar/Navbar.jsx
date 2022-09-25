@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Close, DarkMode, DarkModeSharp, LightModeSharp, Menu, SearchSharp } from '@mui/icons-material'
+import { Close, DarkModeSharp, LanguageSharp, LightModeSharp, Menu, SearchSharp } from '@mui/icons-material'
 import { Link, useLocation, useParams } from 'react-router-dom';
 
 import "./Navbar.scss";
@@ -8,13 +8,13 @@ const navLinks = [
   { name: "News", link: "general"},
   { name: "Sports", link: "sports"},
   { name: "Business", link: "business"},
-  { name: "Tech", link: "technology"},
+  { name: "Tech", link: "tech"},
   { name: "Science", link: "science"},
   { name: "Entertainment", link: "entertainment"},
   { name: "Health", link: "health"},
 ]
 
-const Navbar = ({ setDark, dark }) => {
+const Navbar = ({ setDark, dark, setIsOpen }) => {
   const [toggle, setToggle] = useState(false);
   
   let location = useLocation().pathname;
@@ -39,6 +39,8 @@ const Navbar = ({ setDark, dark }) => {
                   <Link to="/search">
                     <SearchSharp fontSize="large" />
                   </Link>
+
+                  <LanguageSharp fontSize="large" onClick={() => setIsOpen(true)} />
                   
                   {!dark ? <DarkModeSharp fontSize="large"  onClick={() => setDark(dark ? false : true)} /> :
                   <LightModeSharp fontSize="large" onClick={() => setDark(dark ? false : true)}/>

@@ -4,7 +4,9 @@ import "./Footer.scss"
 
 const Footer = () => {
   return (
-    <div>Footer</div>
+    <div className="news__footer">
+      Made by Abhishek
+    </div>
   )
 }
 

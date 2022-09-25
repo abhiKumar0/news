@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import Spinner from 'react-spinner';
 
-import { Card, Hero, HorizontalScroll, NameBar } from "../../Components"
+import { Card, Hero, Spinner, NameBar } from "../../Components"
 
 
 import "./News.scss"
 
-const News = ({ loading, setLoading }) => {
+const News = ({ loading, setLoading, country }) => {
     const [newsArticles, setNewsArticles] = useState([]);
     const [sportArticles, setSportArticles] = useState([]);
     const [techArticles, setTechArticles] = useState([]);
@@ -14,43 +13,44 @@ const News = ({ loading, setLoading }) => {
 
     const fetchNewsArticles = async () => {
       setLoading(true);
-      let url = `https://newsapi.org/v2/top-headlines?category=general&apiKey=${import.meta.env.VITE_NEWS_API_KEY}`
+      // let url = `https://newsapi.org/v2/top-headlines?country=${country}&category=general&apiKey=${import.meta.env.VITE_NEWS_API_KEY}`
+      let url = `https://api.thenewsapi.com/v1/news/top?api_token=${import.meta.env.VITE_NEWS_API_KEY}&categories=general&locale=${country}`
+      
   
       const data = await fetch(url);
-      // console.log(data)
       const parsedData = await data.json();
-      setNewsArticles(parsedData.articles);
+      setNewsArticles(parsedData.data);
       setLoading(false);
     }
 
     const fetchSportArticles = async () => {
       setLoading(true);
-      let url = `https://newsapi.org/v2/top-headlines?category=sports&apiKey=${import.meta.env.VITE_NEWS_API_KEY}`
+      // let url = `https://newsapi.org/v2/top-headlines?country=${country}&category=sports&apiKey=${import.meta.env.VITE_NEWS_API_KEY}`
+      let url = `https://api.thenewsapi.com/v1/news/top?api_token=${import.meta.env.VITE_NEWS_API_KEY}&categories=sports&locale=${country}`
   
       const data = await fetch(url);
-      // console.log(data)
       const parsedData = await data.json();
-      setSportArticles(parsedData.articles);
+      setSportArticles(parsedData.data);
       setLoading(false);
     }
     const fetchBusinessArticles = async () => {
       setLoading(true);
-      let url = `https://newsapi.org/v2/top-headlines?category=business&apiKey=${import.meta.env.VITE_NEWS_API_KEY}`
+      // let url = `https://newsapi.org/v2/top-headlines?country=${country}&category=business&apiKey=${import.meta.env.VITE_NEWS_API_KEY}`
+      let url = `https://api.thenewsapi.com/v1/news/top?api_token=${import.meta.env.VITE_NEWS_API_KEY}&categories=business&locale=${country}`
   
       const data = await fetch(url);
-      // console.log(data)
       const parsedData = await data.json();
-      setBusinessArticles(parsedData.articles);
+      setBusinessArticles(parsedData.data);
       setLoading(false);
     }
     const fetchTechArticles = async () => {
       setLoading(true);
-      let url = `https://newsapi.org/v2/top-headlines?category=technology&apiKey=${import.meta.env.VITE_NEWS_API_KEY}`
+      // let url = `https://newsapi.org/v2/top-headlines?country=${country}&category=technology&apiKey=${import.meta.env.VITE_NEWS_API_KEY}`
+      let url = `https://api.thenewsapi.com/v1/news/top?api_token=${import.meta.env.VITE_NEWS_API_KEY}&categories=tech&locale=${country}`
   
       const data = await fetch(url);
-      // console.log(data)
       const parsedData = await data.json();
-      setTechArticles(parsedData.articles);
+      setTechArticles(parsedData.data);
       setLoading(false);
     }
 
@@ -59,18 +59,17 @@ const News = ({ loading, setLoading }) => {
       fetchSportArticles();
       fetchBusinessArticles();
       fetchTechArticles();
-    }, [])
+    }, [country])
 
   return (
     <section>
-      <Spinner />
         <div className="news__news news-section">
           <NameBar name="News" bgColor="yellow" link="general" />
           <div className="news__card-container">
             {!loading ? newsArticles.slice(0,3).map((article) => (
               <Card article={article} />
             )) : (
-              <h1>Loading...</h1>
+              <Spinner />
             )}
           </div>
         </div>
@@ -81,7 +80,7 @@ const News = ({ loading, setLoading }) => {
             {!loading ? sportArticles.slice(0,3).map((article) => (
               <Card article={article} />
             )) : (
-              <h1>Loading...</h1>
+              <Spinner />
             )}
           </div>
         </div>
@@ -93,7 +92,7 @@ const News = ({ loading, setLoading }) => {
             {!loading ? businessArticles.slice(1,4).map((article) => (
               <Card article={article} />
             )) : (
-              <h1>Loading...</h1>
+              <Spinner />
             )}
           </div>
         </div>

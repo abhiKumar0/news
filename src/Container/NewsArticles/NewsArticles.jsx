@@ -1,69 +1,119 @@
 import React,{ useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 
-import { Card, Search } from "../../Components"
+import { Card, Paginate, Search, Spinner } from "../../Components"
 import "./NewsArticles.scss";
 
-const NewsArticles = ({ loading, setLoading }) => {
+
+let catAry = ['general'];
+
+const NewsArticles = ({ loading, setLoading, country }) => {
   let { category } = useParams();
+  let location = useLocation().pathname;
+  
 
+  
   const [newsArticles, setNewsArticles] = useState([]);
-  const [ searchQuery, setSearchQuery ] = useState('india');
- 
+  const [newsArticles2, setNewsArticles2] = useState([]);
+  const [searchQuery, setSearchQuery ] = useState('');
+  const [page1, setPage1] = useState(1);
+  const [page2, setPage2] = useState(2);
 
+  
+ 
+ 
+  
+        if (category !== undefined) {
+          catAry.push(category);
+        }
+
+  
   useEffect(() => {
 
     const fetchNewsArticles = async () => {
       setLoading(true);
-      let url = `https://newsapi.org/v2/top-headlines?category=${category}&apiKey=${import.meta.env.VITE_NEWS_API_KEY}`
+      let url = `https://api.thenewsapi.com/v1/news/top?api_token=${import.meta.env.VITE_NEWS_API_KEY}&categories=${catAry[catAry.length - 1]}&locale=${country}&page=${page1}`;
+      
 
       const data = await fetch(url);
       const parsedData = await data.json();
 
-      setNewsArticles(parsedData.articles);
-      setLoading(false)
-    }
 
-    fetchNewsArticles();
-    
-
-  }, [category])
-
-  useEffect(() => {
-
-    const fetchSearchedArticles = async () => {
-      setLoading(true)
-      let url = `https://newsapi.org/v2/everything?q=${searchQuery}&apiKey=${import.meta.env.VITE_NEWS_API_KEY}`;
-      
-      const data = await fetch(url, {
-        method: 'GET',
-        // mode: 'no-cors',
-        "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept, Authorization"
-      });
-      const parsedData = await data.json();
-      setNewsArticles(parsedData.articles);
-      console.log(newsArticles)
+      setNewsArticles(parsedData.data);
       setLoading(false);
     }
 
-    fetchSearchedArticles();
+    const fetchNewsArticles2 = async () => {
+      setLoading(true);
+      let url = `https://api.thenewsapi.com/v1/news/top?api_token=${import.meta.env.VITE_NEWS_API_KEY}&categories=${catAry[catAry.length - 1]}&locale=${country}&page=${page2}`;
+      
 
-  }, [searchQuery]);
+      const data = await fetch(url);
+      const parsedData = await data.json();
+
+
+      setNewsArticles2(parsedData.data);
+      setLoading(false);
+    }
+
+    fetchNewsArticles();
+    fetchNewsArticles2();
+    
+
+  }, [catAry[catAry.length - 1], country], page1, page2);
+
+  const fetchSearchedArticles = async () => {
+    setLoading(true)
+    let url = `https://api.thenewsapi.com/v1/news/top?api_token=${import.meta.env.VITE_NEWS_API_KEY}&search=${searchQuery}&locale=${country}&page=${page1}`
+    
+    const data = await fetch(url);
+    const parsedData = await data.json();
+    setNewsArticles(parsedData.data)
+    setLoading(false);
+  }
+
+  const fetchSearchedArticles2 = async () => {
+    setLoading(true)
+    let url = `https://api.thenewsapi.com/v1/news/top?api_token=${import.meta.env.VITE_NEWS_API_KEY}&search=${searchQuery}&locale=${country}&page=${page2}`
+    
+    const data = await fetch(url);
+    const parsedData = await data.json();
+    setNewsArticles2(parsedData.data);
+    setLoading(false);
+  }
+  
+  useEffect(() => {
+    fetchSearchedArticles();
+    fetchSearchedArticles2();
+
+  }, [searchQuery, page1, page2])
+
+  
+  
+ 
+
+
 
   return (
     <div className="news__newsArticles">
       <div className="news__newsArticles-search">
-        <Search setSearchQuery={setSearchQuery} />
+        <Search setSearchQuery={setSearchQuery} fetchSearchedArticles={fetchSearchedArticles} fetchSearchedArticles2={fetchSearchedArticles2} />
       </div>
       <div className="news__newsArticles-cards">
         <div className="news__newsArticles-cards-container">
           {!loading ? newsArticles?.map((article, i) => (
             <Card article={article} key={i} />
           )) : (
-            <h1>Loading..</h1>
+            <Spinner />
+          )}
+          {!loading ? newsArticles2?.map((article, i) => (
+            <Card article={article} key={i} />
+          )) : (
+            <div></div>
           )}
         </div>
       </div>
+      <Paginate />
     </div>
   )
 }
