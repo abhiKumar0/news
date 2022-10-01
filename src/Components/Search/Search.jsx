@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import "./Search.scss"
 
-const Search = ({ setSearchQuery, fetchSearchedArticles, fetchSearchedArticles2 }) => {
+const Search = ({ setSearchQuery, fetchSearchedArticles, setPage }) => {
   const [searchInput, setSearchInput ] = useState("");
 
   const navigate = useNavigate();
@@ -12,13 +12,11 @@ const Search = ({ setSearchQuery, fetchSearchedArticles, fetchSearchedArticles2 
   
 
   const  handleClick = () => {
-
+    navigate("/search");
     setSearchQuery(searchInput);
-
+    setPage(1);
     if (searchInput.length > 0) {
-
       fetchSearchedArticles();
-      fetchSearchedArticles2();
     }
       
     }

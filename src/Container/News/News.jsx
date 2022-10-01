@@ -13,7 +13,6 @@ const News = ({ loading, setLoading, country }) => {
 
     const fetchNewsArticles = async () => {
       setLoading(true);
-      // let url = `https://newsapi.org/v2/top-headlines?country=${country}&category=general&apiKey=${import.meta.env.VITE_NEWS_API_KEY}`
       let url = `https://api.thenewsapi.com/v1/news/top?api_token=${import.meta.env.VITE_NEWS_API_KEY}&categories=general&locale=${country}`
       
   
@@ -25,7 +24,6 @@ const News = ({ loading, setLoading, country }) => {
 
     const fetchSportArticles = async () => {
       setLoading(true);
-      // let url = `https://newsapi.org/v2/top-headlines?country=${country}&category=sports&apiKey=${import.meta.env.VITE_NEWS_API_KEY}`
       let url = `https://api.thenewsapi.com/v1/news/top?api_token=${import.meta.env.VITE_NEWS_API_KEY}&categories=sports&locale=${country}`
   
       const data = await fetch(url);
@@ -35,7 +33,6 @@ const News = ({ loading, setLoading, country }) => {
     }
     const fetchBusinessArticles = async () => {
       setLoading(true);
-      // let url = `https://newsapi.org/v2/top-headlines?country=${country}&category=business&apiKey=${import.meta.env.VITE_NEWS_API_KEY}`
       let url = `https://api.thenewsapi.com/v1/news/top?api_token=${import.meta.env.VITE_NEWS_API_KEY}&categories=business&locale=${country}`
   
       const data = await fetch(url);
@@ -45,7 +42,6 @@ const News = ({ loading, setLoading, country }) => {
     }
     const fetchTechArticles = async () => {
       setLoading(true);
-      // let url = `https://newsapi.org/v2/top-headlines?country=${country}&category=technology&apiKey=${import.meta.env.VITE_NEWS_API_KEY}`
       let url = `https://api.thenewsapi.com/v1/news/top?api_token=${import.meta.env.VITE_NEWS_API_KEY}&categories=tech&locale=${country}`
   
       const data = await fetch(url);
@@ -66,7 +62,7 @@ const News = ({ loading, setLoading, country }) => {
         <div className="news__news news-section">
           <NameBar name="News" bgColor="yellow" link="general" />
           <div className="news__card-container">
-            {!loading ? newsArticles.slice(0,3).map((article) => (
+            {!loading ? newsArticles.slice(1,4).map((article) => (
               <Card article={article} />
             )) : (
               <Spinner />
@@ -108,7 +104,6 @@ const News = ({ loading, setLoading, country }) => {
           </div>
         </div>
 
-        {/* <HorizontalScroll articles={newsArticles} /> */}
     </section>
   )
 }

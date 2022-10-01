@@ -4,7 +4,7 @@ import "./Card.scss"
 
 const Card = ({ article }) => {
   return (
-    <a href={article?.url} className="news__card">
+    <a href={article?.url} target="_blank" className="news__card">
         <img src={article?.image_url} alt="" />
         <div className="news__card-content">
             <div>

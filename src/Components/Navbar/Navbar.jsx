@@ -14,7 +14,7 @@ const navLinks = [
   { name: "Health", link: "health"},
 ]
 
-const Navbar = ({ setDark, dark, setIsOpen }) => {
+const Navbar = ({ setDark, dark, setIsOpen, setPage, catAry }) => {
   const [toggle, setToggle] = useState(false);
   
   let location = useLocation().pathname;
@@ -30,13 +30,13 @@ const Navbar = ({ setDark, dark, setIsOpen }) => {
                     <Link className={`${location === '/' ? "active" : "deactive"}`} to="/">Home</Link>
                   </li>
                   {navLinks.map((item) => (
-                    <li key={item.name}>
+                    <li onClick={() => setPage(1)} key={item.name}>
                       <Link className={`${location === `/category-${item.link}` ? "active" : "deactive"}`} to={`/category-${item.link}`} >{item.name}</Link>
                       </li>
                   ))}
               </ul>
               <div className="news__navbar-content-icons">
-                  <Link to="/search">
+                  <Link onClick={() => catAry.push(`${catAry[catAry.length - 1].length !== 0 ? "general" : catAry[catAry.length - 1]}`)} to="/search">
                     <SearchSharp fontSize="large" />
                   </Link>
 
@@ -52,12 +52,12 @@ const Navbar = ({ setDark, dark, setIsOpen }) => {
               </div>
           </div>
       </nav>
-      <ul className={`${!toggle ? "news__navbar-hide" : "news__navbar-menu-list "}`}>
+      <ul className={`${!toggle ? "news__navbar-hide" : "news__navbar-menu-list "}`} onClick={() => setToggle(false)}>
             <li>
               <Link className={`${location === '/' ? "active" : "deactive"}`} to="/">Home</Link>
             </li>
                 {navLinks.map((item) => (
-            <li key={item.name}>
+            <li onClick={() => setPage(1)} key={item.name}>
               <Link className={`${location === `/category-${item.link}` ? "active" : "deactive"}`} to={`/category-${item.link}`}>{item.name}</Link>
             </li>
                 ))}

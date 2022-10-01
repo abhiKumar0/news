@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Close } from '@mui/icons-material'
-import Modal from 'react-modal';
 
 import "./CountryModal.scss";
 
@@ -39,7 +38,7 @@ const CountryModal = ({ isOpen, setIsOpen, setCountry, country }) => {
         <div className="news__country-container">
         <button onClick={() => setIsOpen(false)} className="close-btn">
           <Close />
-          </button>
+        </button>
         <h1>Select Country</h1>
         <ul>
           {countries.map((item, i) => (
