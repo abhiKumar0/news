@@ -16,6 +16,7 @@ const NewsArticles = ({ loading, setLoading, country, page, setPage, catAry }) =
   const [newsArticles, setNewsArticles] = useState([]);
   const [searchQuery, setSearchQuery ] = useState('');
   const [results, setResults] = useState(0);
+  const [miniLoading, setMiniLoading] = useState(false)
 
   
  
@@ -57,10 +58,24 @@ const NewsArticles = ({ loading, setLoading, country, page, setPage, catAry }) =
     } else if (location === "/search") {
       fetchSearchedArticles();
     }
-  }, [catAry[catAry.length - 1], country, searchQuery, page])
+  }, [catAry[catAry.length - 1], country, searchQuery])
 
 
- 
+ const updatedNewsArticles = async() => {
+    setMiniLoading(true);
+    let url;
+
+    if (location === `/category-${catAry[catAry.length - 1]}`) {
+      url = `https://api.thenewsapi.com/v1/news/top?api_token=${import.meta.env.VITE_NEWS_API_KEY}&categories=${catAry[catAry.length - 1]}&locale=${country}&page=${page + 1}`;
+
+    } else if (location === "/search") {
+      url = `https://api.thenewsapi.com/v1/news/top?api_token=${import.meta.env.VITE_NEWS_API_KEY}&search=${searchQuery}&locale=${country}&page=${page + 1}`;
+    }
+    const data = await fetch(url);
+    const parsedData = await data.json();
+    setNewsArticles(newsArticles.concat(parsedData.data));
+    setMiniLoading(false);
+ }
 
 
 
@@ -78,7 +93,7 @@ const NewsArticles = ({ loading, setLoading, country, page, setPage, catAry }) =
           )}
         </div>
       </div>
-      <Paginate page={page} setPage={setPage} results={results} />
+      <Paginate page={page} setPage={setPage} miniLoading={miniLoading} updatedNewsArticles={updatedNewsArticles} />
     </div>
   )
 }

@@ -5,7 +5,7 @@ import "./Footer.scss"
 const Footer = () => {
   return (
     <div className="news__footer">
-      Made by Abhishek
+      Made with <span>frustration 😤</span> by Abhishek
     </div>
   )
 }
